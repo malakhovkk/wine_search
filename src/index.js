@@ -6,16 +6,12 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import LogIn from "./components/LogIn";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <div>
-        <h1>Hello World</h1>
-        <Link to="about">About Us</Link>
-      </div>
-    ),
+    element: <LogIn />,
   },
   {
     path: "about",
@@ -30,4 +26,3 @@ createRoot(document.getElementById("root")).render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
