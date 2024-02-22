@@ -26,6 +26,7 @@ function LogIn() {
       navigate("vendors");
     } catch (e) {
       console.log(e);
+      setError(true);
     }
   };
 
