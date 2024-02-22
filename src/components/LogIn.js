@@ -8,7 +8,7 @@ function LogIn() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
+  const [error, setError] = useState("");
   const send = async (e) => {
     e.preventDefault();
     try {
@@ -25,12 +25,13 @@ function LogIn() {
       localStorage.setItem("token", res.result);
       navigate("vendors");
     } catch (e) {
-      alert("Неверные данные");
+      console.log(e);
     }
   };
 
   return (
     <form>
+      {error ? "Повторите ввод!" : ""}
       <label>Ник:</label>
       <input
         type="text"
