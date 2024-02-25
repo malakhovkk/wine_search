@@ -17,7 +17,7 @@ function Vendors() {
 
   const fetchData = async (e) => {
     try {
-      let result = await axios.get("http://194.87.239.231:55555/api/vendor", {
+      let result = await axios.get("http://194.87.239.231:55555/api/vendor?have_pricelist=1", {
         headers: {
           "content-type": "application/x-www-form-urlencoded",
           Authorization: `Bearer ${localStorage.getItem("token")}`,

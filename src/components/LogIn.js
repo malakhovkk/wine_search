@@ -13,16 +13,14 @@ function LogIn() {
     e.preventDefault();
     try {
       let res = await axios
-        .post("http://194.87.239.231:55555/api/logon", { login, password })
-        .then((res) => {
-          res = res.data;
-          console.log(res);
-
-          navigate("vendors");
-        });
+        .post("http://194.87.239.231:55555/api/logon", { login, password });
+       
+      console.log(res);
       res = res.data;
       localStorage.setItem("login", res.user.login);
       localStorage.setItem("token", res.result);
+      console.log(res);
+      console.log(res.user.login, res.result);
       navigate("vendors");
     } catch (e) {
       console.log(e);
