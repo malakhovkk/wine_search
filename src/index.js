@@ -7,6 +7,8 @@ import {
   Link,
 } from "react-router-dom";
 
+import "./index.css";
+
 import LogIn from "./components/LogIn";
 
 import Vendors from "./components/Vendors";

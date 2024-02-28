@@ -12,9 +12,11 @@ function LogIn() {
   const send = async (e) => {
     e.preventDefault();
     try {
-      let res = await axios
-        .post("http://194.87.239.231:55555/api/logon", { login, password });
-       
+      let res = await axios.post("http://194.87.239.231:55555/api/logon", {
+        login,
+        password,
+      });
+
       console.log(res);
       res = res.data;
       localStorage.setItem("login", res.user.login);
@@ -29,29 +31,31 @@ function LogIn() {
   };
 
   return (
-    <form>
-      {error ? "Повторите ввод!" : ""}
-      <label>Ник:</label>
-      <input
-        type="text"
-        id="name"
-        name="login"
-        onChange={(e) => setLogin(e.target.value)}
-        required
-      />
-      <br />
-      <label>Пароль:</label>
-      <input
-        type="password"
-        id="name"
-        name="password"
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <br />
+    <div className="login-page">
+      <form className="login-page__form">
+        {error ? "Повторите ввод!" : ""}
+        <label>Ник:</label>
+        <input
+          type="text"
+          id="name"
+          name="login"
+          onChange={(e) => setLogin(e.target.value)}
+          required
+        />
+        <br />
+        <label>Пароль:</label>
+        <input
+          type="password"
+          id="name"
+          name="password"
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <br />
 
-      <input type="submit" onClick={send} value="Отправить" />
-    </form>
+        <input type="submit" onClick={send} value="Отправить" />
+      </form>
+    </div>
   );
 }
 
