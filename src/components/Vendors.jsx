@@ -17,13 +17,16 @@ function Vendors() {
 
   const fetchData = async (e) => {
     try {
-      let result = await axios.get("http://194.87.239.231:55555/api/vendor?have_pricelist=1", {
-        headers: {
-          "content-type": "application/x-www-form-urlencoded",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          User: `${localStorage.getItem("login")}`,
-        },
-      });
+      let result = await axios.post(
+        "http://194.87.239.231:55555/api/VendorContact",
+        {
+          headers: {
+            "content-type": "application/x-www-form-urlencoded",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            User: `${localStorage.getItem("login")}`,
+          },
+        }
+      );
       setVendors(result.data);
     } catch (e) {
       console.log(e);
@@ -84,6 +87,26 @@ function Vendors() {
   }));
   console.log(vendors2);
   let res = [];
+
+  const [popUpStatus, setPopUpStatus] = useState(false);
+  const [vendorContact, setVendorContact] = useState({});
+  const changeVendorContact = (e) => {
+    setVendorContact({ ...vendorContact, [e.target.name]: e.target.value });
+  };
+
+  const save = async () => {
+    let res = await axios.post(
+      `http://194.87.239.231:55555/api/VendorContact/`,
+      {
+        headers: {
+          "content-type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          User: `${localStorage.getItem("login")}`,
+        },
+      }
+    );
+  };
+
   vendors2.forEach((vendor) => {
     console.log(vendor.contacts);
     res.push(
@@ -107,6 +130,30 @@ function Vendors() {
                   </a>
                 ) : (
                   contact.contact
+                )}
+                <button onClick={() => setPopUpStatus(true)}>Добавить</button>
+                {popUpStatus && (
+                  <form onSubmit={save}>
+                    Имя:{" "}
+                    <input
+                      type="text"
+                      onChange={changeVendorContact}
+                      name="name"
+                    />
+                    Контакт:{" "}
+                    <input
+                      type="text"
+                      onChange={changeVendorContact}
+                      name="contact"
+                    />
+                    Тип:{" "}
+                    <input
+                      type="text"
+                      onChange={changeVendorContact}
+                      name="type"
+                    />
+                    <input type="submit" />
+                  </form>
                 )}
               </div>
             ))}{" "}
